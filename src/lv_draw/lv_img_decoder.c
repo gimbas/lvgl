@@ -378,7 +378,6 @@ lv_res_t lv_img_decoder_built_in_open(lv_img_decoder_t * decoder, lv_img_decoder
     else if(cf == LV_IMG_CF_INDEXED_1BIT || cf == LV_IMG_CF_INDEXED_2BIT || cf == LV_IMG_CF_INDEXED_4BIT ||
             cf == LV_IMG_CF_INDEXED_8BIT) {
 
-#if LV_IMG_CF_INDEXED
         uint8_t px_size       = lv_img_cf_get_px_size(cf);
         uint32_t palette_size = 1 << px_size;
 
@@ -431,21 +430,12 @@ lv_res_t lv_img_decoder_built_in_open(lv_img_decoder_t * decoder, lv_img_decoder
 
         dsc->img_data = NULL;
         return LV_RES_OK;
-#else
-        LV_LOG_WARN("Indexed (palette) images are not enabled in lv_conf.h. See LV_IMG_CF_INDEXED");
-        return LV_RES_INV;
-#endif
     }
     /*Alpha indexed images. */
     else if(cf == LV_IMG_CF_ALPHA_1BIT || cf == LV_IMG_CF_ALPHA_2BIT || cf == LV_IMG_CF_ALPHA_4BIT ||
             cf == LV_IMG_CF_ALPHA_8BIT) {
-#if LV_IMG_CF_ALPHA
         dsc->img_data = NULL;
         return LV_RES_OK; /*Nothing to process*/
-#else
-        LV_LOG_WARN("Alpha indexed images are not enabled in lv_conf.h. See LV_IMG_CF_ALPHA");
-        return LV_RES_INV;
-#endif
     }
     /*Unknown format. Can't decode it.*/
     else {
@@ -562,7 +552,6 @@ static lv_res_t lv_img_decoder_built_in_line_alpha(lv_img_decoder_dsc_t * dsc, l
                                                    lv_coord_t len, uint8_t * buf)
 {
 
-#if LV_IMG_CF_ALPHA
     const lv_opa_t alpha1_opa_table[2]  = {0, 255};          /*Opacity mapping with bpp = 1 (Just for compatibility)*/
     const lv_opa_t alpha2_opa_table[4]  = {0, 85, 170, 255}; /*Opacity mapping with bpp = 2*/
     const lv_opa_t alpha4_opa_table[16] = {0,  17, 34,  51,  /*Opacity mapping with bpp = 4*/
@@ -661,11 +650,6 @@ static lv_res_t lv_img_decoder_built_in_line_alpha(lv_img_decoder_dsc_t * dsc, l
     lv_mem_buf_release(fs_buf);
 #endif
     return LV_RES_OK;
-
-#else
-    LV_LOG_WARN("Image built-in alpha line reader failed because LV_IMG_CF_ALPHA is 0 in lv_conf.h");
-    return LV_RES_INV;
-#endif
 }
 
 static lv_res_t lv_img_decoder_built_in_line_indexed(lv_img_decoder_dsc_t * dsc, lv_coord_t x, lv_coord_t y,

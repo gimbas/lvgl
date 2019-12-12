@@ -1,16 +1,11 @@
 /**
- * @file systick.c
+ * @file lv_hal_tick.c
  * Provide access to the system tick with 1 millisecond resolution
  */
 
 /*********************
  *      INCLUDES
  *********************/
-#ifdef LV_CONF_INCLUDE_SIMPLE
-#include "lv_conf.h"
-#else
-#include "../../../lv_conf.h"
-#endif
 
 #include "lv_hal_tick.h"
 #include <stddef.h>
