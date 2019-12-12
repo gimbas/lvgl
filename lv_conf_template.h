@@ -43,9 +43,6 @@
 /*Images pixels with this color will not be drawn (with chroma keying)*/
 #define LV_COLOR_TRANSP    LV_COLOR_LIME         /*LV_COLOR_LIME: pure green*/
 
-/* Enable chroma keying for indexed images. */
-#define LV_INDEXED_CHROMA    1
-
 /* Enable anti-aliasing (lines, and radiuses will be smoothed) */
 #define LV_ANTIALIAS        1
 
@@ -135,9 +132,6 @@ typedef void * lv_anim_user_data_t;
 
 #endif
 
-/* 1: Enable shadow drawing*/
-#define LV_USE_SHADOW           1
-
 /* 1: Enable object groups (for keyboard/encoder navigation) */
 #define LV_USE_GROUP            1
 #if LV_USE_GROUP
@@ -160,12 +154,6 @@ typedef void * lv_fs_drv_user_data_t;
 /*========================
  * Image decoder and cache
  *========================*/
-
-/* 1: Enable indexed (palette) images */
-#define LV_IMG_CF_INDEXED       1
-
-/* 1: Enable alpha indexed images */
-#define LV_IMG_CF_ALPHA         1
 
 /* Default image cache size. Image caching keeps the images opened.
  * If only the built-in image formats are used there is no real advantage of caching.
@@ -202,7 +190,7 @@ typedef void * lv_img_decoder_user_data_t;
  *
  * The default value just prevents a GCC warning.
  */
-#define LV_EXPORT_CONST_INT(int_value) struct _silence_gcc_warning
+#define LV_EXPORT_CONST_INT(int_value) struct _lv_silence_gcc_warning
 
 /*===================
  *  HAL settings
@@ -308,8 +296,8 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 #define LV_FONT_ROBOTO_28    0
 
 /* Demonstrate special features */
-#define LV_FONT_ROBOTO_12_SUBPX 1
-#define LV_FONT_ROBOTO_28_COMPRESSED 1  /*bpp = 3*/
+#define LV_FONT_ROBOTO_12_SUBPX 0
+#define LV_FONT_ROBOTO_28_COMPRESSED 0  /*bpp = 3*/
 
 /*Pixel perfect monospace font
  * http://pelulamu.net/unscii/ */
@@ -398,7 +386,7 @@ typedef void * lv_font_user_data_t;
 typedef void * lv_obj_user_data_t;
 
 /*1: enable `lv_obj_realaign()` based on `lv_obj_align()` parameters*/
-#define LV_USE_OBJ_REALIGN          1
+#define LV_USE_OBJ_REALIGN          0
 
 /* Enable to make the object clickable on a larger area.
  * LV_EXT_CLICK_AREA_OFF or 0: Disable this feature
@@ -507,7 +495,7 @@ typedef void * lv_obj_user_data_t;
 #define LV_USE_LMETER   1
 
 /*Mask (dependencies: -)*/
-#define LV_USE_OBJMASK  0
+#define LV_USE_OBJMASK  1
 
 /*Message box (dependencies: lv_rect, lv_btnm, lv_label)*/
 #define LV_USE_MBOX     1
@@ -587,7 +575,7 @@ typedef void * lv_obj_user_data_t;
 /*--END OF LV_CONF_H--*/
 
 /*Be sure every define has a default value*/
-#include "lvgl/src/lv_conf_checker.h"
+#include <lvgl/src/lv_conf_internal.h>
 
 #endif /*LV_CONF_H*/
 
