@@ -6,3 +6,4 @@ include $(LVGL_DIR)/lvgl/src/lv_misc/lv_misc.mk
 include $(LVGL_DIR)/lvgl/src/lv_themes/lv_themes.mk
 include $(LVGL_DIR)/lvgl/src/lv_draw/lv_draw.mk
 
+CFLAGS += "-I$(LVGL_DIR)"
